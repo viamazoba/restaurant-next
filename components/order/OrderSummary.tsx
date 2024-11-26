@@ -1,6 +1,7 @@
 "use client"
 
 import { useStore } from "@/src/store"
+import { ProductDetails } from "./ProductDetails"
 
 
 export const OrderSummary = () => {
@@ -16,7 +17,14 @@ export const OrderSummary = () => {
                     :
                     (
                         <div className="mt-5">
-                            <p>Si hay algo</p>
+                            {
+                                order.map(item => (
+                                    <ProductDetails
+                                        key={item.id}
+                                        item={item}
+                                    />
+                                ))
+                            }
                         </div>
                     )
             }
