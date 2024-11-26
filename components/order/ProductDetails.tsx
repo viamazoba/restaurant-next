@@ -17,7 +17,7 @@ const MAX_ITEMS = 5
 
 export const ProductDetails = ({ item }: ProductDetailsProps) => {
 
-    const { increaseQuantity, decreaseQuantity } = useStore()
+    const { increaseQuantity, decreaseQuantity, removeItem } = useStore()
     const disableDecreaseButton = useMemo(() => item.quantity === MIN_ITEMS, [item])
     const disableIncreaseButton = useMemo(() => item.quantity === MAX_ITEMS, [item])
 
@@ -29,7 +29,8 @@ export const ProductDetails = ({ item }: ProductDetailsProps) => {
 
                     <button
                         type="button"
-                        onClick={() => { }}
+                        onClick={() => removeItem(item.id)}
+                        className="cursor-pointer"
                     >
                         <XCircleIcon className="text-red-600 h-8 w-8" />
                     </button>
