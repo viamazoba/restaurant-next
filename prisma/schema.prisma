@@ -15,10 +15,29 @@ model Category {
 }
 
 model Product {
-  id         Int      @id @default(autoincrement())
-  name       String
-  price      Float
-  image      String
-  categoryId Int
-  category   Category @relation(fields: [categoryId], references: [id])
+  id            Int             @id @default(autoincrement())
+  name          String
+  price         Float
+  image         String
+  categoryId    Int
+  category      Category        @relation(fields: [categoryId], references: [id])
+  OrderProducts OrderProducts[] @relation("ProductToOrderProducts")
+}
+
+model Order {
+  id            Int             @id @default(autoincrement())
+  name          String
+  total         Float
+  date          DateTime        @default(now())
+  status        Boolean         @default(false)
+  orderReadyAt  DateTime?
+  OrderProducts OrderProducts[] @relation("OrderToOrderProducts")
+}
+
+model OrderProducts {
+  id        Int     @id @default(autoincrement())
+  orderId   Int
+  order     Order   @relation("OrderToOrderProducts", fields: [orderId], references: [id])
+  productId Int
+  product   Product @relation("ProductToOrderProducts", fields: [productId], references: [id])
 }
