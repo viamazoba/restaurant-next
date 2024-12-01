@@ -11,7 +11,7 @@ import { OrderSchema } from "@/src/schema"
 
 export const OrderSummary = () => {
 
-    const { order } = useStore()
+    const { order, clearOrder } = useStore()
     const total = useMemo(() => order.reduce((total, item) => total + (item.quantity * item.price), 0), [order])
 
     const handleCreateOrder = async (formData: FormData) => {
@@ -27,6 +27,8 @@ export const OrderSummary = () => {
             result.error.issues.forEach(issue => {
                 toast.error(issue.message)
             })
+
+            return
         }
         const response = await createOrder(data)
 
@@ -35,6 +37,9 @@ export const OrderSummary = () => {
                 toast.error(issue.message)
             })
         }
+
+        toast.success('Pedido Realizado Correctamente')
+        clearOrder()
     }
 
     return (
