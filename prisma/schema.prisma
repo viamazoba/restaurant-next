@@ -40,4 +40,5 @@ model OrderProducts {
   order     Order   @relation("OrderToOrderProducts", fields: [orderId], references: [id])
   productId Int
   product   Product @relation("ProductToOrderProducts", fields: [productId], references: [id])
+  quantity  Int
 }
