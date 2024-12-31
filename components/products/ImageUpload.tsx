@@ -15,8 +15,9 @@ export const ImageUpload = ({ image }: { image: string | undefined }) => {
             onSuccess={(result, { widget }) => {
                 if (result.event === 'success') {
                     widget.close()
-                    // @ts-ignore
-                    setImageUrl(result.info?.secure_url)
+                    if (typeof result.info !== 'string') {
+                        setImageUrl(result.info?.secure_url as string)
+                    }
                 }
             }}
             uploadPreset='vas8itvn'

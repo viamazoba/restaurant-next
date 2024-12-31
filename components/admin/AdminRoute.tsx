@@ -7,7 +7,7 @@ type AdminRouteProps = {
     link: {
         url: string
         text: string
-        blank: string
+        blank: boolean
     }
 }
 
